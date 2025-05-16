@@ -24,8 +24,8 @@ The project is primarily contained within the `Tensorflow.ipynb` Jupyter Noteboo
 A custom CNN was built from scratch and optimized through various experiments.
 
 * **Best Achieved Validation Accuracy:** ~81% (0.8082)
-* **Key Optimizer:** AdamW with `learning_rate=0.0005` (using `ReduceLROnPlateau`) and `weight_decay=1e-4`. Class weights were disabled for this best run.
-* **Architecture Highlights (for 81% accuracy model):**
+* **Key Optimizer:** AdamW with `learning_rate=0.0005` (using `ReduceLROnPlateau`) and `weight_decay=1e-4`.
+* **Architecture Highlights:**
     * Input Rescaling (1./255) for images of size (128, 128, 3).
     * Three Convolutional Blocks: (Conv2D + BatchNormalization + ReLU + SpatialDropout2D(0.1) + MaxPooling2D). Filters: 32, 64, 128.
     * GlobalAveragePooling2D.
@@ -45,7 +45,6 @@ A custom CNN was built from scratch and optimized through various experiments.
 * **Validation Loss:** ~0.584
 * **Macro Average F1-score:** 0.79
 * **Weighted Average F1-score:** 0.81
-* The "gatto" (cat) class F1-score reached a respectable 0.71.
 
 *(Ensure `image_4dd345.png` is in your `images` folder and correctly shows this ~81% custom CNN run)*
 ![Custom CNN Training History](images/image_4dd345.png "Custom CNN (AdamW) Accuracy and Loss Curves - 81% Run")
@@ -67,6 +66,21 @@ Validation Set Classification Report:
     accuracy                           0.81      5235
     macro avg      0.80      0.79      0.79      5235
     weighted avg   0.81      0.81      0.81      5235
+
+### Confusion Matrix 
+
+| True \ Predicted | `cane` | `cavallo` | `elefante` | `farfalla` | `gallina` | `gatto` | `mucca` | `pecora` | `ragno` | `scoiattolo` |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **`cane`** | 759 | 29 | 13 | 4 | 25 | 33 | 18 | 19 | 20 | 27 |
+| **`cavallo`** | 51 | 394 | 12 | 2 | 11 | 3 | 31 | 10 | 5 | 3 |
+| **`elefante`** | 17 | 10 | 220 | 1 | 3 | 5 | 3 | 6 | 7 | 1 |
+| **`farfalla`** | 4 | 0 | 1 | 360 | 13 | 4 | 0 | 1 | 37 | 9 |
+| **`gallina`** | 22 | 2 | 2 | 1 | 520 | 3 | 6 | 3 | 18 | 16 |
+| **`gatto`** | 56 | 1 | 2 | 2 | 8 | 223 | 2 | 4 | 13 | 20 |
+| **`mucca`** | 39 | 36 | 13 | 1 | 7 | 0 | 274 | 25 | 2 | 2 |
+| **`pecora`** | 22 | 12 | 13 | 0 | 7 | 9 | 25 | 281 | 7 | 6 |
+| **`ragno`** | 10 | 3 | 3 | 15 | 8 | 9 | 0 | 1 | 915 | 15 |
+| **`scoiattolo`** | 21 | 1 | 5 | 1 | 7 | 12 | 1 | 4 | 43 | 285 |
 
 ## Phase 2: Transfer Learning with VGG16 (Experimental)
 
@@ -136,18 +150,21 @@ Classification Report:
     macro avg      0.88      0.86      0.87      5235
     weighted avg   0.88      0.88      0.88      5235
 
-Confusion Matrix:
 
-[[847  30   3   2  16  17  11   7   6   8]
- [ 31 444   2   0   2   1  30  10   2   0]
- [  6  10 244   0   0   2   2   6   1   2]
- [  1   2   0 388   5   0   0   0  29   4]
- [ 21   1   1   2 538   2   2  10   7   9]
- [ 45   2   0   2   5 256   1   3   5  12]
- [ 17  21   1   0   3   0 333  23   0   1]
- [ 25   8   9   0   4   2  22 306   2   4]
- [  3   2   0  15   3   1   0   1 945   9]
- [ 16   3   2   0  10  16   0   3  17 313]]
+### Confusion Matrix 
+
+| True \ Predicted | `cane` | `cavallo` | `elefante` | `farfalla` | `gallina` | `gatto` | `mucca` | `pecora` | `ragno` | `scoiattolo` |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **`cane`** | 847 | 30 | 3 | 2 | 16 | 17 | 11 | 7 | 6 | 8 |
+| **`cavallo`** | 31 | 444 | 2 | 0 | 2 | 1 | 30 | 10 | 2 | 0 |
+| **`elefante`** | 6 | 10 | 244 | 0 | 0 | 2 | 2 | 6 | 1 | 2 |
+| **`farfalla`** | 1 | 2 | 0 | 388 | 5 | 0 | 0 | 0 | 29 | 4 |
+| **`gallina`** | 21 | 1 | 1 | 2 | 538 | 2 | 2 | 10 | 7 | 9 |
+| **`gatto`** | 45 | 2 | 0 | 2 | 5 | 256 | 1 | 3 | 5 | 12 |
+| **`mucca`** | 17 | 21 | 1 | 0 | 3 | 0 | 333 | 23 | 0 | 1 |
+| **`pecora`** | 25 | 8 | 9 | 0 | 4 | 2 | 22 | 306 | 2 | 4 |
+| **`ragno`** | 3 | 2 | 0 | 15 | 3 | 1 | 0 | 1 | 945 | 9 |
+| **`scoiattolo`** | 16 | 3 | 2 | 0 | 10 | 16 | 0 | 3 | 17 | 313 |
 
  ## Technologies Used
 
@@ -196,7 +213,6 @@ The entire project is contained within the **`Tensorflow.ipynb`** Jupyter Notebo
 1.  Ensure your Kaggle API credentials are correctly set in Cell 1 of the notebook.
 2.  Run the notebook cells sequentially.
     * **Cells 1-2:** Kaggle API and dataset download/setup.
-    * **Custom CNN Section (following data prep):** Contains the development and training of the custom CNN (best run achieved ~81% accuracy with AdamW).
-    * **"Cell 4" (Transfer Learning with VGG16):** Implements VGG16 feature extraction and fine-tuning.
+    * **Cell 3 Custom CNN Section (following data prep):** Contains the development and training of the custom CNN (best run achieved ~81% accuracy with AdamW).
+    * **Cell 4 Transfer Learning with VGG16:** Implements VGG16 feature extraction and fine-tuning.
 
-## Repository Structure (Suggested)

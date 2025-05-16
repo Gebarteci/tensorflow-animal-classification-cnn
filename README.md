@@ -1,4 +1,4 @@
-# Advanced Animal Image Classification: From Custom CNN to Transfer Learning
+# Advanced Animal Image Classification: Custom CNN & Transfer Learning
 
 ## Overview
 
@@ -50,7 +50,23 @@ A custom CNN was built from scratch and optimized through various experiments.
 *(Ensure `image_4dd345.png` is in your `images` folder and correctly shows this ~81% custom CNN run)*
 ![Custom CNN Training History](images/image_4dd345.png "Custom CNN (AdamW) Accuracy and Loss Curves - 81% Run")
 
-*(You can optionally include the classification report and confusion matrix for this custom CNN model here if you wish, similar to how it's structured for the VGG16 model below.)*
+Validation Set Classification Report:
+              precision    recall  f1-score   support
+
+        cane       0.76      0.80      0.78       947
+     cavallo       0.81      0.75      0.78       522
+    elefante       0.77      0.81      0.79       273
+    farfalla       0.93      0.84      0.88       429
+     gallina       0.85      0.88      0.87       593
+       gatto       0.74      0.67      0.71       331
+       mucca       0.76      0.69      0.72       399
+      pecora       0.79      0.74      0.76       382
+       ragno       0.86      0.93      0.89       979
+    scoiattolo     0.74      0.75      0.75       380
+
+    accuracy                           0.81      5235
+    macro avg      0.80      0.79      0.79      5235
+    weighted avg   0.81      0.81      0.81      5235
 
 ## Phase 2: Transfer Learning with VGG16 (Experimental)
 
@@ -117,10 +133,11 @@ Classification Report:
        scoiattolo  0.86      0.82      0.84       380
 
     accuracy                           0.88      5235
-   macro avg       0.88      0.86      0.87      5235
-weighted avg       0.88      0.88      0.88      5235
+    macro avg      0.88      0.86      0.87      5235
+    weighted avg   0.88      0.88      0.88      5235
 
 Confusion Matrix:
+
 [[847  30   3   2  16  17  11   7   6   8]
  [ 31 444   2   0   2   1  30  10   2   0]
  [  6  10 244   0   0   2   2   6   1   2]

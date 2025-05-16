@@ -50,8 +50,8 @@ A custom CNN was built from scratch and optimized through various experiments.
 ![Custom CNN Training History](images/image_4dd345.png "Custom CNN (AdamW) Accuracy and Loss Curves - 81% Run")
 
 Validation Set Classification Report:
-              precision    recall  f1-score   support
 
+                precision   recall   f1-score   support            
         cane       0.76      0.80      0.78       947
      cavallo       0.81      0.75      0.78       522
     elefante       0.77      0.81      0.79       273
@@ -133,8 +133,8 @@ To explore leveraging pre-trained models, `VGG16` was implemented.
 *(Copy and paste the classification report for your best VGG16 model here after running the evaluation.)*
 
 Classification Report:
-              precision    recall  f1-score   support
-              
+
+              precision    recall  f1-score   support              
         cane       0.84      0.89      0.86       947
      cavallo       0.85      0.85      0.85       522
     elefante       0.93      0.89      0.91       273
@@ -144,7 +144,7 @@ Classification Report:
        mucca       0.83      0.83      0.83       399
       pecora       0.83      0.80      0.81       382
        ragno       0.93      0.97      0.95       979
-       scoiattolo  0.86      0.82      0.84       380
+     scoiattolo    0.86      0.82      0.84       380
 
     accuracy                           0.88      5235
     macro avg      0.88      0.86      0.87      5235

@@ -4,7 +4,7 @@
 
 This project documents an extensive journey into 10-class animal image classification using TensorFlow and Keras. It showcases an iterative development process, starting with a custom-built Convolutional Neural Network (CNN) that was progressively optimized. Following this, the project explores Transfer Learning with the `VGG16` architecture to compare approaches and potentially further enhance performance.
 
-This repository serves as a detailed log of experiments with data augmentation, regularization techniques, optimizer selection (Adam vs. AdamW), learning rate scheduling, and the impact of different model architectures.
+This repository serves as a result of experiments with data augmentation, regularization techniques, optimizer selection (Adam vs. AdamW), learning rate scheduling, and the impact of different model architectures.
 
 **Dataset:**
 The project uses the **"Animals-10" dataset from Kaggle**, which consists of 10 animal classes: cane (dog), cavallo (horse), elefante (elephant), farfalla (butterfly), gallina (chicken), gatto (cat), mucca (cow), pecora (sheep), ragno (spider), scoiattolo (squirrel).

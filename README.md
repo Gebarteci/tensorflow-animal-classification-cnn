@@ -46,9 +46,6 @@ A custom CNN was built from scratch and optimized through various experiments.
 * **Macro Average F1-score:** 0.79
 * **Weighted Average F1-score:** 0.81
 
-*(Ensure `image_4dd345.png` is in your `images` folder and correctly shows this ~81% custom CNN run)*
-![Custom CNN Training History](images/image_4dd345.png "Custom CNN (AdamW) Accuracy and Loss Curves - 81% Run")
-
 Validation Set Classification Report:
 
                 precision   recall   f1-score   support            
@@ -82,7 +79,7 @@ Validation Set Classification Report:
 | **`ragno`** | 10 | 3 | 3 | 15 | 8 | 9 | 0 | 1 | 915 | 15 |
 | **`scoiattolo`** | 21 | 1 | 5 | 1 | 7 | 12 | 1 | 4 | 43 | 285 |
 
-## Phase 2: Transfer Learning with VGG16 (Experimental)
+## Phase 2: Transfer Learning with VGG16 
 
 To explore leveraging pre-trained models, `VGG16` was implemented.
 
@@ -104,7 +101,6 @@ To explore leveraging pre-trained models, `VGG16` was implemented.
         * `RandomFlip("horizontal")`
         * `RandomContrast(0.1)`
         * `RandomBrightness(0.1)`
-    * *Note: The `tf.keras.applications.vgg16.preprocess_input` function was not explicitly mapped to the datasets in the provided "Cell 4" snippet before fitting the `transfer_model`. VGG16 typically expects inputs preprocessed via this function (e.g., scaling and BGR channel ordering). The model's performance might be affected if this specific preprocessing is missing.*
 * **Optimizer & Training Stages:**
     1.  **Initial Head Training (Base Frozen):**
         * Optimizer: Adam with `learning_rate=0.001`.
@@ -112,27 +108,9 @@ To explore leveraging pre-trained models, `VGG16` was implemented.
     2.  **Fine-Tuning (Base Partially Unfrozen):**
         * Optimizer: Adam with a lower `learning_rate=1e-5`.
         * Epochs: Continued up to a total of 20 epochs (i.e., `20 - (last_epoch_of_initial_training)` additional epochs).
-* **Callbacks:** The notebook snippet for "Cell 4" does not explicitly show `EarlyStopping` or `ReduceLROnPlateau` being used for the VGG16 training stages. These would be beneficial to add for robust training.
-
-### Performance (Transfer Learning Model - VGG16)
-
-**Please run "Cell 4" (and subsequent evaluation cells for VGG16) in your `Tensorflow.ipynb` notebook and fill in this section with your final results.**
-
-* **Validation Accuracy (after fine-tuning):** **`[XX.XX]%`**
-* **Validation Loss (after fine-tuning):** `[e.g., 0.XX]`
-* **Macro Average F1-score (after fine-tuning):** `[e.g., 0.XX]`
-* **Weighted Average F1-score (after fine-tuning):** `[e.g., 0.XX]`
-
-### Training History (Transfer Learning Model - VGG16)
-*Note: The plotting code in "Cell 4" only visualizes the initial 10-epoch `history`. To see the full training progression including fine-tuning, you'll need to combine `history.history` and `history_fine_tune.history` from your notebook and plot them together.*
-
-*(Save your combined VGG16 training plot (e.g., as `vgg16_combined_training_plot.png`) in an `images` folder and update the path below.)*
-![VGG16 Combined Training History](images/vgg16_combined_training_plot.png "VGG16 Accuracy and Loss Curves - Initial + Fine-tuning")
 
 ### Classification Report (Transfer Learning Model - VGG16)
-*(Copy and paste the classification report for your best VGG16 model here after running the evaluation.)*
 
-Classification Report:
 
               precision    recall  f1-score   support              
         cane       0.84      0.89      0.86       947
@@ -177,36 +155,37 @@ Classification Report:
 
 ## Setup
 
-1.  Clone the repository:
-    ```bash
-    git clone [https://github.com/](https://github.com/)[YourUsername]/[Your-Repository-Name].git
-    cd [Your-Repository-Name]
-    ```
-2.  **Kaggle API Setup:**
-    * The `Tensorflow.ipynb` notebook (Cells 1 & 2) handles Kaggle API setup for downloading the "Animals-10" dataset.
-    * **You must replace stars "*" in `KAGGLE_USERNAME = "*****"` and `KAGGLE_KEY = "***************"` with your own Kaggle API credentials.**
-3.  Create a Python virtual environment (recommended):
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
-4.  Install dependencies (create a `requirements.txt` file from your environment):
-    ```bash
-    pip install -r requirements.txt
-    ```
-    Your `requirements.txt` should include:
-    ```
-    tensorflow # Or your specific version, e.g., tensorflow>=2.11
-    scikit-learn
-    matplotlib
-    numpy
-    kaggle
-    # Add any other specific libraries used
-    ```
-5.  **Dataset:**
-    * The notebook will download and unzip the "Animals-10" dataset from Kaggle.
-    * If you download manually, ensure the path in the notebook (e.g., `DATA_DIR`) is correct.
+## Setup for Google Colab
 
+This project is designed to be run in a Google Colab environment.
+
+1.  **Open in Colab:**
+    * Upload the `Tensorflow.ipynb` notebook to your Google Drive.
+    * Open it with Google Colaboratory.
+    * Alternatively, if your project is on GitHub, you can open it directly in Colab by replacing `github.com` with `colab.research.google.com/github/` in your repository's notebook URL.
+        * Example: `https://colab.research.google.com/github/[YourUsername]/[Your-Repository-Name]/blob/main/Tensorflow.ipynb`
+
+2.  **Enable GPU Acceleration:**
+    * In Colab, go to **Runtime** -> **Change runtime type**.
+    * Select **GPU** from the "Hardware accelerator" dropdown menu and click **Save**. This will significantly speed up model training.
+    * It will work in free tier **T4 GPU**
+      
+3.  **Kaggle API Setup (for Dataset Download):**
+    * The `Tensorflow.ipynb` notebook (Cells 1 & 2) includes steps to download the "Animals-10" dataset directly from Kaggle using the Kaggle API.
+    * **To make this work in Colab:**
+        1.  Go to your Kaggle account page (`https://www.kaggle.com/[YourKaggleUsername]/account`).
+        2.  Click on "Create New API Token." This will download a `kaggle.json` file.
+        3.  In the Colab notebook, when you run the first code cell (Cell 1, which sets up Kaggle credentials), it will prompt you to upload this `kaggle.json` file. Alternatively, the cell has lines to manually input your username and key.  **You must replace stars "*" in `KAGGLE_USERNAME = "*****"` and `KAGGLE_KEY = "***************"` with your own Kaggle API credentials.**
+    * After setting up the credentials, the subsequent cells will download and unzip the dataset into your Colab environment.
+
+4.  **Dependencies:**
+    * Google Colab comes with TensorFlow, Scikit-learn, Matplotlib, and NumPy pre-installed.
+
+5.  **Dataset Path:**
+    * The notebook is configured to download and unzip the dataset to a specific path (usually `./animals10/raw-img/` relative to the Colab environment's root after download). The `DATA_DIR` variable in the notebook should already point to this.
+    * If you manually upload the dataset to your Google Drive and mount your Drive, you would need to adjust the `DATA_DIR` path accordingly. However, the notebook is set up for direct Kaggle download.
+    * The `Tensorflow.ipynb` notebook (Cells 1 & 2) handles Kaggle API setup for downloading the "Animals-10" dataset.
+  
 ## Usage
 
 The entire project is contained within the **`Tensorflow.ipynb`** Jupyter Notebook.
